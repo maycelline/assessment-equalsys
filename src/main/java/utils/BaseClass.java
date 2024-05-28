@@ -22,6 +22,7 @@ public class BaseClass {
     }
 
     public boolean isSameLink(String actualUrl){
+        customWait(3000);
         try {
             Thread.sleep(variables.getWAIT_DURATION());
             String url = driver.getCurrentUrl();
@@ -41,4 +42,21 @@ public class BaseClass {
         wait.until(ExpectedConditions.visibilityOf(el));
     }
 
+    public void customWait(int millisecond){
+        try{
+            Thread.sleep(millisecond);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void inputField (WebElement element, String value){
+        element.clear();
+        element.sendKeys(value);
+    }
+
+    public String getTextElement(WebElement element){
+        customWait(500);
+        return element.getText();
+    }
 }

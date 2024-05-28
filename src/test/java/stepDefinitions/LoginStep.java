@@ -1,7 +1,9 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.user.LoginPage;
@@ -30,4 +32,44 @@ public class LoginStep {
 
     @Then("User is navigated to Login Page")
     public void userIsNavigatedToLoginPage(){assertTrue(loginPage.isSameLink(loginPage.getLoginUrl()));}
+    
+    @When("User enter email field with value {string}")
+    public void userEnterEmailFieldWithValue(String email) {
+        loginPage.enterEmail(email);
+    }
+
+    @And("User enter password field with value {string}")
+    public void userEnterPasswordFieldWithValue(String password) {
+        loginPage.enterPassword(password);
+    }
+
+    @And("User click Login button")
+    public void userClickLoginButton() {
+        loginPage.clickLoginButton();
+    }
+
+    @Then("Error message about Wrong Credential shown")
+    public void errorMessageAboutWrongCredentialShown() {
+        assertTrue(loginPage.isErrorMessageCannotLoginShown());
+    }
+
+    @Then("Error message about Wrong Email Format shown")
+    public void errorMessageAboutWrongEmailFormatShown() {
+        assertTrue(loginPage.isErrorMessageEmailFormatShown());
+    }
+
+    @Then("Error message about Empty Value shown")
+    public void errorMessageAboutEmptyValueShown() {
+        assertTrue(loginPage.isErrorMessageEmailEmptyShown());
+    }
+
+    @When("User click on Forgot Password link")
+    public void userClickOnForgotPasswordLink() {
+        loginPage.clickForgotPasswordLink();
+    }
+
+    @Then("User is navigated to Forgot Password page")
+    public void userIsNavigatedToForgotPasswordPage() {
+        assertTrue(loginPage.isSameLink(loginPage.getForgotPasswordUrl()));
+    }
 }

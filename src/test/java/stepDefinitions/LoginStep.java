@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.user.LoginPage;
 import stepDefinitions.Hooks;
@@ -28,14 +29,18 @@ public class LoginStep {
     }
 
     @Given("User access Home Page by URL")
-    public void userAccessHomePageViaUrl(){loginPage.goToPageByUrl(loginPage.getHomeUrl());}
+    public void userAccessHomePageViaUrl() {
+        loginPage.goToPageByUrl(loginPage.getHomeUrl());
+    }
 
     @Then("User is navigated to Login Page")
-    public void userIsNavigatedToLoginPage(){assertTrue(loginPage.isSameLink(loginPage.getLoginUrl()));}
-    
+    public void userIsNavigatedToLoginPage() {
+        assertTrue(loginPage.isSameLink(loginPage.getLoginUrl()));
+    }
+
     @When("User enter email field with value {string}")
     public void userEnterEmailFieldWithValue(String email) {
-        loginPage.enterEmail(email);
+        loginPage.enterEmail(loginPage.getInputEmailFieldWebElement(), email);
     }
 
     @And("User enter password field with value {string}")
@@ -55,12 +60,12 @@ public class LoginStep {
 
     @Then("Error message about Wrong Email Format shown")
     public void errorMessageAboutWrongEmailFormatShown() {
-        assertTrue(loginPage.isErrorMessageEmailFormatShown());
+        assertTrue(loginPage.isErrorMessageEmailFormatShown(loginPage.getErrorMessageForEmailFormatWebElement()));
     }
 
     @Then("Error message about Empty Value shown")
     public void errorMessageAboutEmptyValueShown() {
-        assertTrue(loginPage.isErrorMessageEmailEmptyShown());
+        assertTrue(loginPage.isErrorMessageEmptyShown(loginPage.getErrorMessageForEmptyEmailWebElement(), loginPage.getErrorMessageForEmptyPasswordWebElement()));
     }
 
     @When("User click on Forgot Password link")

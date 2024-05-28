@@ -34,8 +34,8 @@ Feature: Login Functionality
     Then Error message about Wrong Email Format shown
 
     Examples:
-      | email                         | password        |
-      | maycellineselvyant            | mariamaycelline |
+      | email              | password        |
+      | maycellineselvyant | mariamaycelline |
 
   @Login @EmptyValue
   Scenario Outline: User is not able to log in when user input empty value
